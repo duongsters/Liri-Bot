@@ -15,3 +15,7 @@ var axios = require("axios");
 //include the moment npm package stored within 'moment' variable
 var moment = require("moment");
 
+
+//grabs 'titleArtist' variable within the 3rd node of argument line
+var titleArtist = process.argv[2];
+
