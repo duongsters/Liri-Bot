@@ -21,3 +21,13 @@ var titleArtist = process.argv[2];
 
 //jQuery bandsintown api for the selected title artist
 var queryUrl = "https://rest.bandsintown.com/artists/" + titleArtist + "/events?app_id=codingbootcamp"
+
+//axios get request to 'queryUrl'
+axios.get(queryUrl).then(
+    function(response) {
+        var titleVenue = response.data[0].name;
+        var locationVenue = response.data[0].city;
+        var dateTimeVenue = response.data[0].datetime;
+        console.log("Name of Artist: " + titleArtist  + "\nVenue Name: " + titleVenue + "\nVenue Location: "
+         + locationVenue  + "Date Time: " + dateTimeVenue);
+    })
