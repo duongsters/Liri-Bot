@@ -19,3 +19,5 @@ var moment = require("moment");
 //grabs 'titleArtist' variable within the 3rd node of argument line
 var titleArtist = process.argv[2];
 
+//jQuery bandsintown api for the selected title artist
+var queryUrl = "https://rest.bandsintown.com/artists/" + titleArtist + "/events?app_id=codingbootcamp"
