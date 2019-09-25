@@ -7,3 +7,5 @@ var keys = require("./keys.js");
 var spotify = require("node-spotify-api");
 //access to my personal spotify api information
 var spotify = new Spotify(keys.spotify);
+//access to the filesystem
+var fs = require("fs");
