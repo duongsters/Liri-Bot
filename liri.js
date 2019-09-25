@@ -9,3 +9,9 @@ var spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
 //access to the filesystem
 var fs = require("fs");
+
+//include the axios npm package stored within 'axios' variable
+var axios = require("axios");
+//include the moment npm package stored within 'moment' variable
+var moment = require("moment");
+
