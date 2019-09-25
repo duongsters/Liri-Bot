@@ -25,11 +25,11 @@ var queryUrl = "https://rest.bandsintown.com/artists/" + titleArtist + "/events?
 //axios get request to 'queryUrl'
 axios.get(queryUrl).then(
     function(response) {
-        var titleVenue = response.data[0].name;
-        var locationVenue = response.data[0].city;
+        var titleVenue = response.data[0].venue.name;
+        var locationVenue = response.data[0].venue.city;
         var dateTimeVenue = response.data[0].datetime;
         console.log("Name of Artist: " + titleArtist  + "\nVenue Name: " + titleVenue + "\nVenue Location: "
-         + locationVenue  + "Date Time: " + dateTimeVenue);
+         + locationVenue  + "\nDate Time: " + dateTimeVenue);
     })
     .catch(function(error){
         if (error.response) {
