@@ -20,10 +20,10 @@ var moment = require('moment');
 var titleArtist = process.argv[2];
 
 //jQuery bandsintown api for the selected title artist
-var queryUrl = "https://rest.bandsintown.com/artists/" + titleArtist + "/events?app_id=codingbootcamp"
+var bandsUrl = "https://rest.bandsintown.com/artists/" + titleArtist + "/events?app_id=codingbootcamp"
 
-//axios get request to 'queryUrl'
-axios.get(queryUrl).then(
+//axios get request to 'bandsUrl'
+axios.get(bandsUrl).then(
     function(response) {
         var titleVenue = response.data[0].venue.name;
         var locationVenue = response.data[0].venue.city;
@@ -52,4 +52,5 @@ axios.get(queryUrl).then(
 // ----------------OMDb portion-----------------------------------------------------------------------------------------------------------------
 //grabs 'titleMovie' variable within the 3rd node of argument line
 var titleMovie = process.argv[2];
-
+//omdbUrl variable to hold the url link to my OMDb API key & logging the responses to the console
+var omdbUrl = "https://www.omdbapi.com/?t=" + titleMovie + "&y=&plot=short&apikey=9e558ee4";
