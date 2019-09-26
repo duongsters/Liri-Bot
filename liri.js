@@ -29,7 +29,7 @@ axios.get(queryUrl).then(
         var locationVenue = response.data[0].venue.city;
         var dateTimeVenue = response.data[0].datetime;
         console.log("Name of Artist: " + titleArtist  + "\nVenue Name: " + titleVenue + "\nVenue Location: "
-         + locationVenue  + "\nDate Time: " + dateTimeVenue);
+         + locationVenue  + "\nDate Time: " + moment(dateTimeVenue).format("MM/DD/YYYY"));
     })
     .catch(function(error){
         if (error.response) {
