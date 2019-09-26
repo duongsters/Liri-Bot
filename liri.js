@@ -75,5 +75,17 @@ axios.get(omdbUrl).then (
         var movieLanguage = response.data.Language;
         var moviePlot = response.data.Plot;
         var movieActors = response.data.Actors;
+
+        console.log("Title of the movie: " + titleMovie + "\nYear Movie Released: "
+        + movieReleaseDate + "\nIMDB Rating: " + movieImdbRating + 
+        "\nRotten Tomatoes Rating: " + movieTomatoesRating + "\nLocation of Movie Production: "
+        + movieCountryProduction + "\nLanguage of Movie: " + movieLanguage
+        + "\nMovie Plot: " + moviePlot + "\nActors in Movie: " + movieActors);
+
         
-    })
+
+
+    });
+
+
+
