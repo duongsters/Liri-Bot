@@ -15,7 +15,7 @@ var axios = require("axios");
 //include the moment npm package stored within 'moment' variable
 var moment = require('moment');
 
-
+// ---------------------Bands In Town portion--------------------------------------------------------------------------------------------------
 //grabs 'titleArtist' variable within the 3rd node of argument line
 var titleArtist = process.argv[2];
 
@@ -47,3 +47,9 @@ axios.get(queryUrl).then(
         }
             console.log(error.config);
     });
+
+
+// ----------------OMDb portion-----------------------------------------------------------------------------------------------------------------
+//grabs 'titleMovie' variable within the 3rd node of argument line
+var titleMovie = process.argv[2];
+
