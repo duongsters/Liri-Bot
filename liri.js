@@ -48,9 +48,25 @@ axios.get(bandsUrl).then(
             console.log(error.config);
     });
 
+    // * Title of the movie.
+    // * Year the movie came out.
+    // * IMDB Rating of the movie.
+    // * Rotten Tomatoes Rating of the movie.
+    // * Country where the movie was produced.
+    // * Language of the movie.
+    // * Plot of the movie.
+    // * Actors in the movie.
+  
+
 
 // ----------------OMDb portion-----------------------------------------------------------------------------------------------------------------
 //grabs 'titleMovie' variable within the 3rd node of argument line
 var titleMovie = process.argv[2];
-//omdbUrl variable to hold the url link to my OMDb API key & logging the responses to the console
+//'omdbUrl' variable to hold the url link to my OMDb API key & logging the responses to the console
 var omdbUrl = "https://www.omdbapi.com/?t=" + titleMovie + "&y=&plot=short&apikey=9e558ee4";
+
+//axios get request to 'omdbUrl'
+axios.get(omdbUrl).then (
+    function(response) {
+
+    })
