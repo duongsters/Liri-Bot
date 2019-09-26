@@ -89,7 +89,20 @@ axios.get(omdbUrl).then (
 
 
 // ------------------Do What It Says portion-------------------------------------------------------------------------------------------------
-fs.readFile("random.txt", "utf8", function(error, data))
+// The code will store the contents of the reading inside the variable "data" callback function
+// line 94 will begin starting to read from the file "random.txt"...'utf8' will construct the text it writes in random.txt as actually letters that we can read/understand
+fs.readFile("random.txt", "utf8", function(error, data) {
+    // If the code experiences any errors it will log the error to the console.
+    if (error) {
+        return console.log(error);
+    }
+      // We will then print the contents of data
+    console.log(data);
+    // Then split it by commas (to make it more readable)
+    var dataArr = data.split(",");
+    // We will then re-display the content as an array for later use.
+    console.log(dataArr);
+});
 
 
 
