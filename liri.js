@@ -48,16 +48,6 @@ axios.get(bandsUrl).then(
             console.log(error.config);
     });
 
-    // * Title of the movie.
-    // * Year the movie came out.
-    // * IMDB Rating of the movie.
-    // * Rotten Tomatoes Rating of the movie.
-    // * Country where the movie was produced.
-    // * Language of the movie.
-    // * Plot of the movie.
-    // * Actors in the movie.
-  
-
 
 // ----------------OMDb portion-----------------------------------------------------------------------------------------------------------------
 //grabs 'titleMovie' variable within the 3rd node of argument line
@@ -68,7 +58,7 @@ var omdbUrl = "https://www.omdbapi.com/?t=" + titleMovie + "&y=&plot=short&apike
 //axios get request to 'omdbUrl'
 axios.get(omdbUrl).then (
     function(response) {
-        var movieReleaseDate = response.data.Released;
+        var movieReleaseDate = response.data.Year;
         var movieImdbRating = response.data.imdbRating;
         var movieTomatoesRating = response.data.Ratings[1].Value;
         var movieCountryProduction = response.data.Country;
@@ -81,11 +71,27 @@ axios.get(omdbUrl).then (
         "\nRotten Tomatoes Rating: " + movieTomatoesRating + "\nLocation of Movie Production: "
         + movieCountryProduction + "\nLanguage of Movie: " + movieLanguage
         + "\nMovie Plot: " + moviePlot + "\nActors in Movie: " + movieActors);
-
-        
-
-
+    })
+        .catch(function(error){
+            if(error.response){
+                console.log(error.response.name);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            }
+            else if (error.request) {
+                console.log(error.request);
+            }
+            else {
+                console.log("Error", error.message);
+            }
+            console.log(error.config);
     });
 
 
+// ------------------Do What It Says portion-------------------------------------------------------------------------------------------------
 
+
+
+
+
+//------------------Spotify This Song portion------------------------------------------------------------------------------------------------
