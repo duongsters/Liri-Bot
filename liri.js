@@ -68,5 +68,12 @@ var omdbUrl = "https://www.omdbapi.com/?t=" + titleMovie + "&y=&plot=short&apike
 //axios get request to 'omdbUrl'
 axios.get(omdbUrl).then (
     function(response) {
-
+        var movieReleaseDate = response.data.Released;
+        var movieImdbRating = response.data.imdbRating;
+        var movieTomatoesRating = response.data.Ratings[1].Value;
+        var movieCountryProduction = response.data.Country;
+        var movieLanguage = response.data.Language;
+        var moviePlot = response.data.Plot;
+        var movieActors = response.data.Actors;
+        
     })
