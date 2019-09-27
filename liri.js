@@ -144,12 +144,23 @@ function renderDoWhatItSays() {
         console.log(data);
         // Then split it by commas (to make it more readable)
         var dataArr = data.split(",");
-        //used for spotify this song 
-        var spotifyLine = data[1];
-        // We will then re-display the content as an array for later use.
-        console.log(dataArr);
 
-    });
+        for (var j = 0; j < dataArr.length; j++) {
+            //if the array index is an even number...
+            if (j % 2 ===0) {
+                //store the value under the 'render' global variable
+                render = dataArr[j];
+            }
+            else {
+                //else, the stored value is an odd number and is stored under the 'search' global variable
+                search = dataArr[j];
+            }
+        };
+
+        
+
+
+    })
 };
 
 
