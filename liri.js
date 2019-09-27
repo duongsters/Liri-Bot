@@ -3,7 +3,8 @@ require("dotenv").config();
 //import the keys.js file and stores it in 'keys' variable
 var keys = require("./keys.js");
 
-
+//access to my personal spotify api information
+var Spotify = require("node-spotify-api");
 //access to my personal spotify api information
 var spotify = new Spotify(keys.spotify);
 
@@ -14,12 +15,11 @@ var fs = require("fs");
 var axios = require("axios");
 //include the moment npm package stored within 'moment' variable
 var moment = require('moment');
-//access to my personal spotify api information
-var Spotify = require("node-spotify-api");
+
 
 //--------------------Global Variables----------------------------------------------------------------------------------------------------------------------
 var render = process.argv[2];
-var search = process.slice(3).join("+");
+var search = process.argv[3];
 
 
 //------------------------main renderments of liri.js--------------------------------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ function renderMovieThis() {
             var moviePlot = response.data.Plot;
             var movieActors = response.data.Actors;
             console.log("\n----------------------------------------------------------------------------------------\n");
-            console.log("Title of the movie: " + titleMovie + "\nYear Movie Released: "
+            console.log("Title of the movie: " + search + "\nYear Movie Released: "
                 + movieReleaseDate + "\nIMDB Rating: " + movieImdbRating +
                 "\nRotten Tomatoes Rating: " + movieTomatoesRating + "\nLocation of Movie Production: "
                 + movieCountryProduction + "\nLanguage of Movie: " + movieLanguage
@@ -157,7 +157,22 @@ function renderDoWhatItSays() {
             }
         };
 
-        
+        console.log("\n\n" + render, search);
+
+        if (render === "concert-this") {
+            renderBandsInTown();
+        }
+        else if (render === "movie-this") {
+            renderMovieThis();
+        }
+        else if (render === "spotify-this-song") {
+            renderSpotifyThisSong()
+        }
+        else {
+            console.log("\n----------------------------------------------------------------------------------------\n");
+            console.log("Error! Try these specific commands:\n\n'concert-this'\n'movie-this'\n'spotify-this-song'\n'do-what-it-says'\n");
+            console.log("\n----------------------------------------------------------------------------------------\n");
+        }
 
 
     })
