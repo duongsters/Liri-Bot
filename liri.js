@@ -23,12 +23,28 @@ var search = process.argv[3];
 
 
 //------------------------main renderments of liri.js--------------------------------------------------------------------------------------------------------
+switch(render) {
+    case "concert-this":
+        renderBandsInTown(search)
+        break;
+    case "movie-this":
+        renderMovieThis(search)
+        break;
+    case "do-what-it-says":
+        renderDoWhatItSays();
+        break;
+    case "spotify-this-song":
+        renderSpotifyThisSong(search);
+        break;
+    default:
+        console.log("Error! Your command is not valid in Liri--try again, please!");
 
+}
 
 // ---------------------Concert_This: Bands In Town portion--------------------------------------------------------------------------------------------------
-function renderBandsInTown (){
-//grabs 'titleArtist' variable within the 3rd node of argument line
-var titleArtist = process.argv[2];
+function renderBandsInTown (titleArtist){
+
+var titleArtist = search;
 
 //jQuery bandsintown api for the selected title artist
 var bandsUrl = "https://rest.bandsintown.com/artists/" + titleArtist + "/events?app_id=codingbootcamp"
@@ -36,9 +52,11 @@ var bandsUrl = "https://rest.bandsintown.com/artists/" + titleArtist + "/events?
 //axios get request to 'bandsUrl'
 axios.get(bandsUrl).then(
     function(response) {
+
         var titleVenue = response.data[0].venue.name;
         var locationVenue = response.data[0].venue.city;
         var dateTimeVenue = response.data[0].datetime;
+
         console.log("\n----------------------------------------------------------------------------------------\n");
         console.log("Name of Artist: " + titleArtist  + 
                     "\nVenue Name: " + titleVenue + 
