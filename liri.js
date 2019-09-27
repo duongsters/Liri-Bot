@@ -19,12 +19,12 @@ var Spotify = require("node-spotify-api");
 
 //--------------------Global Variables----------------------------------------------------------------------------------------------------------------------
 var render = process.argv[2];
-var search = process.argv[3];
+var search = process.slice(3).join("+");
 
 
 //------------------------main renderments of liri.js--------------------------------------------------------------------------------------------------------
-    //renders the operand the user has selected
-switch(render) {
+//renders the operand the user has selected
+switch (render) {
     case "concert-this":
         renderBandsInTown(search)
         break;
@@ -43,77 +43,78 @@ switch(render) {
 }
 
 // ---------------------Concert_This: Bands In Town portion--------------------------------------------------------------------------------------------------
-function renderBandsInTown (titleArtist){
+function renderBandsInTown() {
 
-var titleArtist = search;
+    //jQuery bandsintown api for the selected title artist
+    var bandsUrl = "https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp"
+    //axios get request to 'bandsUrl'
+    axios.get(bandsUrl)
+        //promises with .then to run this function if/when axios is ran above in getting the API of bandsUrl link ref
+        .then(function (response) {
+            var titleVenue = response.data[0].venue.name;
+            var locationVenue = response.data[0].venue.city;
+            var dateTimeVenue = response.data[0].datetime;
 
-//jQuery bandsintown api for the selected title artist
-var bandsUrl = "https://rest.bandsintown.com/artists/" + titleArtist + "/events?app_id=codingbootcamp"
-//axios get request to 'bandsUrl'
-axios.get(bandsUrl)
-    //promises with .then to run this function if/when axios is ran above in getting the API of bandsUrl link ref
-    .then(function(response) {
-        var titleVenue = response.data[0].venue.name;
-        var locationVenue = response.data[0].venue.city;
-        var dateTimeVenue = response.data[0].datetime;
-
-        console.log("\n----------------------------------------------------------------------------------------\n");
-        console.log("Name of Artist: " + titleArtist  + 
-                    "\nVenue Name: " + titleVenue + 
-                    "\nVenue Location: " + locationVenue + 
-                    // used moment within this line below to format the time to 'mm/dd/yyyy'
-                    "\nDate Time: " + moment(dateTimeVenue).format("MM/DD/YYYY"));
-         console.log("\n----------------------------------------------------------------------------------------\n");
+            console.log("\n----------------------------------------------------------------------------------------\n");
+            console.log("Name of Artist: " + search +
+                "\nVenue Name: " + titleVenue +
+                "\nVenue Location: " + locationVenue +
+                // used moment within this line below to format the time to 'mm/dd/yyyy'
+                "\nDate Time: " + moment(dateTimeVenue).format("MM/DD/YYYY"));
+            console.log("\n----------------------------------------------------------------------------------------\n");
         })
-    .catch(function(error){
-        if (error.response) {
-            console.log(error.response.name);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-        }
-        else if (error, request) {
-            //'error.request' is an object that comes back with details pertaining to the error that occured in receiving the request
-            console.log(error.request);
-        }
-        else {
-            //message the user that something happened in setting up the request that triggered an Error
-            console.log("Error", error.message);
-        }
+        .catch(function (error) {
+            if (error.response) {
+                console.log(error.response.name);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            }
+            else if (error, request) {
+                //'error.request' is an object that comes back with details pertaining to the error that occured in receiving the request
+                console.log(error.request);
+            }
+            else {
+                //message the user that something happened in setting up the request that triggered an Error
+                console.log("Error", error.message);
+            }
             console.log(error.config);
-    });
+        });
 };
 
 
 // ----------------Movie_This: OMDb portion-----------------------------------------------------------------------------------------------------------------
-function renderMovieThis (titleMovie) {
-// everything I used and implemented for the OMDb portion (line55-89) is similar coding to BandsInTown portion (lines20-49)
-//grabs 'titleMovie' variable within the 3rd node of argument line
-var titleMovie = process.argv[2];
-//'omdbUrl' variable to hold the url link to my OMDb API key & logging the responses to the console
-var omdbUrl = "https://www.omdbapi.com/?t=" + titleMovie + "&y=&plot=short&apikey=9e558ee4";
+function renderMovieThis() {
+    //If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
+    if(!search) {
+        search = "mr.nobody";
+    }
 
-//axios get request to 'omdbUrl'
-axios.get(omdbUrl)
-    //promises with .then to run this function if/when axios is ran above in getting the API of omdbUrl link ref
-    .then (function(response) {
-        var movieReleaseDate = response.data.Year;
-        var movieImdbRating = response.data.imdbRating;
-        var movieTomatoesRating = response.data.Ratings[1].Value;
-        var movieCountryProduction = response.data.Country;
-        var movieLanguage = response.data.Language;
-        var moviePlot = response.data.Plot;
-        var movieActors = response.data.Actors;
-        console.log("\n----------------------------------------------------------------------------------------\n");
-        console.log("Title of the movie: " + titleMovie + "\nYear Movie Released: "
-        + movieReleaseDate + "\nIMDB Rating: " + movieImdbRating + 
-        "\nRotten Tomatoes Rating: " + movieTomatoesRating + "\nLocation of Movie Production: "
-        + movieCountryProduction + "\nLanguage of Movie: " + movieLanguage
-        + "\nMovie Plot: " + moviePlot + "\nActors in Movie: " + movieActors);
-        console.log("\n----------------------------------------------------------------------------------------\n");
+    //'omdbUrl' variable to hold the url link to my OMDb API key & logging the responses to the console
+    var omdbUrl = "https://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=9e558ee4";
 
-    })
-        .catch(function(error){
-            if(error.response){
+    //axios get request to 'omdbUrl'
+    axios.get(omdbUrl)
+        //promises with .then to run this function if/when axios is ran above in getting the API of omdbUrl link ref
+        .then(function (response) {
+            var movieReleaseDate = response.data.Year;
+            var movieImdbRating = response.data.imdbRating;
+            var movieTomatoesRating = response.data.Ratings[1].Value;
+            var movieCountryProduction = response.data.Country;
+            var movieLanguage = response.data.Language;
+            var moviePlot = response.data.Plot;
+            var movieActors = response.data.Actors;
+            console.log("\n----------------------------------------------------------------------------------------\n");
+            console.log("Title of the movie: " + titleMovie + "\nYear Movie Released: "
+                + movieReleaseDate + "\nIMDB Rating: " + movieImdbRating +
+                "\nRotten Tomatoes Rating: " + movieTomatoesRating + "\nLocation of Movie Production: "
+                + movieCountryProduction + "\nLanguage of Movie: " + movieLanguage
+                + "\nMovie Plot: " + moviePlot + "\nActors in Movie: " + movieActors);
+            console.log("\n----------------------------------------------------------------------------------------\n");
+
+        })
+        // If the code experiences any errors it will log the error to the console.
+        .catch(function (error) {
+            if (error.response) {
                 console.log(error.response.name);
                 console.log(error.response.status);
                 console.log(error.response.headers);
@@ -125,53 +126,58 @@ axios.get(omdbUrl)
                 console.log("Error", error.message);
             }
             console.log(error.config);
-    });
+        });
 };
 
 
 // ------------------Do What It Says portion-------------------------------------------------------------------------------------------------
 
 function renderDoWhatItSays() {
-// The code will store the contents of the reading inside the variable "data" callback function
-// line 94 will begin starting to read from the file "random.txt"...'utf8' will construct the text it writes in random.txt as actually letters that we can read/understand
-fs.readFile("random.txt", "utf8", function (error, data) {
-    // If the code experiences any errors it will log the error to the console.
-    if (error) {
-        return console.log(error);
-    }
-      // We will then print the contents of data
-    console.log(data);
-    // Then split it by commas (to make it more readable)
-    var dataArr = data.split(",");
-    //used for spotify this song 
-    var spotifyLine = data[1];
-    // We will then re-display the content as an array for later use.
-    console.log(dataArr);
+    // The code will store the contents of the reading inside the variable "data" callback function
+    // line 94 will begin starting to read from the file "random.txt"...'utf8' will construct the text it writes in random.txt as actually letters that we can read/understand
+    fs.readFile("random.txt", "utf8", function (error, data) {
+        // If the code experiences any errors it will log the error to the console.
+        if (error) {
+            return console.log(error);
+        }
+        // We will then print the contents of data
+        console.log(data);
+        // Then split it by commas (to make it more readable)
+        var dataArr = data.split(",");
+        //used for spotify this song 
+        var spotifyLine = data[1];
+        // We will then re-display the content as an array for later use.
+        console.log(dataArr);
 
-});
+    });
 };
 
 
 
 
 //------------------Spotify This Song portion------------------------------------------------------------------------------------------------
-function renderSpotifyThisSong (titleSong) {
-    spotify.search({type: "track", query: search}, function (err, response){
+function renderSpotifyThisSong() {
+
+    //If no song is provided then your program will default to "The Sign" by Ace of Base.
+    if (!search) {
+        search = "the+sign";
+    }
+
+    spotify.search({ type: "track", query: search }, function (err, response) {
+        // If the code experiences any errors it will log the error to the console.
         if (err) {
             return console.log("Error: " + err);
         }
 
-        var renderSong = data.tracks.items;
-// Artist(s)
-// The song's name
-// A preview link of the song from Spotify
-// The album that the song is from
-        console.log()
+        var renderSong = response.tracks.items;
 
-
-
-
-
-
-    })
+        // Artist(s) output
+        console.log("Artist(s): " + renderSong[0].artists[0].name +
+            // The song's name output
+            "\nSong Name: " + renderSong[0].name +
+            // A preview link of the song from Spotify output
+            "\nPreview Link: " + renderSong[0].preview_url +
+            // The album that the song is from
+            "\nAlbum: " + renderSong[0].album.name);
+    });
 }
