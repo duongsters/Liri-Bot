@@ -1,6 +1,6 @@
 # Title: Liri-Bot
 ## Site Picture:
-![Screenshots](Screenshot.png), (Screenshot2.png), (Screenshot3.png)
+![Screenshot#1](Screenshot.png), [Screenshot#2](./Screenshot2.png), [Screenshot#3](./Screenshot3.png)
 
 ## Technologies Used:
 - Javascript: This is the primamy house that holds even my node.js technology itself. This is the main technology to render the game.
