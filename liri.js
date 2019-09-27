@@ -157,22 +157,6 @@ function renderDoWhatItSays() {
             }
         };
 
-        console.log("\n\n" + render, search);
-
-        if (render === "concert-this") {
-            renderBandsInTown();
-        }
-        else if (render === "movie-this") {
-            renderMovieThis();
-        }
-        else if (render === "spotify-this-song") {
-            renderSpotifyThisSong()
-        }
-        else {
-            console.log("\n----------------------------------------------------------------------------------------\n");
-            console.log("Error! Try these specific commands:\n\n'concert-this'\n'movie-this'\n'spotify-this-song'\n'do-what-it-says'\n");
-            console.log("\n----------------------------------------------------------------------------------------\n");
-        }
 
 
     })
@@ -186,7 +170,7 @@ function renderSpotifyThisSong() {
 
     //If no song is provided then your program will default to "The Sign" by Ace of Base.
     if (!search) {
-        search = "the+sign";
+        search = "The+Sign";
     }
 
     spotify.search({ type: "track", query: search }, function (err, response) {
