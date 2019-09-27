@@ -23,6 +23,7 @@ var search = process.argv[3];
 
 
 //------------------------main renderments of liri.js--------------------------------------------------------------------------------------------------------
+    //renders the operand the user has selected
 switch(render) {
     case "concert-this":
         renderBandsInTown(search)
@@ -48,11 +49,10 @@ var titleArtist = search;
 
 //jQuery bandsintown api for the selected title artist
 var bandsUrl = "https://rest.bandsintown.com/artists/" + titleArtist + "/events?app_id=codingbootcamp"
-
 //axios get request to 'bandsUrl'
-axios.get(bandsUrl).then(
-    function(response) {
-
+axios.get(bandsUrl)
+    //promises with .then to run this function if/when axios is ran above in getting the API of bandsUrl link ref
+    .then(function(response) {
         var titleVenue = response.data[0].venue.name;
         var locationVenue = response.data[0].venue.city;
         var dateTimeVenue = response.data[0].datetime;
@@ -93,8 +93,9 @@ var titleMovie = process.argv[2];
 var omdbUrl = "https://www.omdbapi.com/?t=" + titleMovie + "&y=&plot=short&apikey=9e558ee4";
 
 //axios get request to 'omdbUrl'
-axios.get(omdbUrl).then (
-    function(response) {
+axios.get(omdbUrl)
+    //promises with .then to run this function if/when axios is ran above in getting the API of omdbUrl link ref
+    .then (function(response) {
         var movieReleaseDate = response.data.Year;
         var movieImdbRating = response.data.imdbRating;
         var movieTomatoesRating = response.data.Ratings[1].Value;
@@ -142,7 +143,8 @@ fs.readFile("random.txt", "utf8", function (error, data) {
     console.log(data);
     // Then split it by commas (to make it more readable)
     var dataArr = data.split(",");
-    var spotifyLine = data.
+    //used for spotify this song 
+    var spotifyLine = data[1];
     // We will then re-display the content as an array for later use.
     console.log(dataArr);
 
@@ -153,6 +155,23 @@ fs.readFile("random.txt", "utf8", function (error, data) {
 
 
 //------------------Spotify This Song portion------------------------------------------------------------------------------------------------
-function renderSpotifyThisSong () {
+function renderSpotifyThisSong (titleSong) {
+    spotify.search({type: "track", query: search}, function (err, response){
+        if (err) {
+            return console.log("Error: " + err);
+        }
 
+        var renderSong = data.tracks.items;
+// Artist(s)
+// The song's name
+// A preview link of the song from Spotify
+// The album that the song is from
+        console.log()
+
+
+
+
+
+
+    })
 }
