@@ -9,7 +9,7 @@
 - Node.JS: An open-source,cross-platform JavaScript runtime enviroment designed to be run outside of browsers-in this case my command terminal.
 - moment.js: Used to convert and manipulare the date/time conversions within the application so it is readable for the user.
 
-## Summary:
+Summary:
     I created an similar application to Apple's SIRI application--a Speech Interpretation and Recognition Interface. My LIRI application is a Language Interpretation and Recognition Interface. Liri is ran mainly on the command terminal node app that would get (.get) through a series of parameter values and append back the user data they requested specifically. In terms of what online repositories that were opened-sourced for publishing node.js project specifically by allowing me to incorporate pre-made snippits (AKA Node Package Managers) into my application specifically were: Axios, DotEnv, moment, Spotify and filesystem. 
 
 ## Code Snippet:
